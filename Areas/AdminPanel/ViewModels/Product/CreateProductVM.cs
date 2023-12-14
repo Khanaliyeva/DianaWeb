@@ -4,7 +4,7 @@ namespace Diana.Areas.AdminPanel.ViewModels.Product
 {
     public class CreateProductVM
     {
-        public string Name { get; set; }
+        public string Name { get; set; } 
         public string Description { get; set; }
         public double Price { get; set; }
         public bool? Availability { get; set; }

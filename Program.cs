@@ -20,4 +20,6 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}");
 
 app.UseStaticFiles();
+app.UseAuthentication();
+app.UseAuthorization();
 app.Run();

@@ -2,7 +2,7 @@
 @{
     int count = 0;
 }
-<div class="container">
+<div class="container" style="margin-top: 100px">
     <div class="d-flex" style="justify-content:space-between;align-items:center">
         <h1>Categories</h1>
         <a class="btn btn-primary" asp-controller="Category" asp-action="Create">Create</a>
@@ -30,11 +30,8 @@
                         <a class="btn btn-secondary" asp-controller="Category" asp-action="Update" asp-route-id="@item.Id">Update</a>
                         <a class="btn btn-danger" asp-controller="Category" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                     </td>
-
                 </tr>
             }
-
-
         </tbody>
     </table>
 

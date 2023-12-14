@@ -34,6 +34,10 @@ namespace Diana.Areas.AdminPanel.Controllers
         public async Task<IActionResult> Create()
         {
             ViewBag.Categories = await _context.Categories.ToListAsync();
+            ViewBag.Sizes = await _context.ProductSizes.ToListAsync();
+            ViewBag.Colors = await _context.ProductColors.ToListAsync();
+            ViewBag.Materials = await _context.ProductMaterials.ToListAsync();
+
             return View();
         }
 
@@ -42,6 +46,9 @@ namespace Diana.Areas.AdminPanel.Controllers
         public async Task<IActionResult> Create(CreateProductVM createProductVM)
         {
             ViewBag.Categories = await _context.Categories.ToListAsync();
+            ViewBag.Sizes = await _context.ProductSizes.ToListAsync();
+            ViewBag.Colors = await _context.ProductColors.ToListAsync();
+            ViewBag.Materials = await _context.ProductMaterials.ToListAsync();
 
             if (!ModelState.IsValid)
             {

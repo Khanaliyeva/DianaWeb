@@ -1,6 +1,7 @@
-﻿@* //@using Diana.Areas.Manage.ViewModels.Product
-//@model CreateProduct
-<div class="container">
+﻿@model CreateProductVM
+
+<div class="container" style="margin-top: 100px">
+
     <form method="post" enctype="multipart/form-data">
         <div class="row">
             <div class="mb-3 col-md-3">
@@ -10,22 +11,11 @@
             </div>
 
             <div class="mb-3 col-md-3">
-                <label asp-for="SKU" class="form-label">ISKU</label>
-                <input asp-for="SKU" class="form-control">
-                <span asp-validation-for="SKU" style="color:red"></span>
-            </div>
-            <div class="mb-3 col-md-3">
                 <label asp-for="Price" class="form-label">Price</label>
                 <input asp-for="Price" class="form-control">
                 <span asp-validation-for="Price" style="color:red"></span>
             </div>
-        </div>
-        <div class="row align-items-center">
-            <div class="mb-3 col-md-6">
-                <label asp-for="Description" class="form-label">Description</label>
-                <textarea class="form-control" asp-for="Description" rows="4"></textarea>
-                <span asp-validation-for="Description" style="color:red"></span>
-            </div>
+
             <div class="mb-3 col-md-3">
                 <label asp-for="CategoryId" class="form-label">category</label>
                 <select class="form-select" asp-for="CategoryId" asp-items="new SelectList(ViewBag.Categories,nameof(Category.Id),nameof(Category.Name))">
@@ -33,32 +23,45 @@
                 </select>
                 <span asp-validation-for="CategoryId" style="color:red"></span>
             </div>
+
             <div class="mb-3 col-md-3">
-                <label asp-for="TagsIds" class="form-label">Tag Id</label>
-                <select class="form-select" asp-for="TagsIds" asp-items="new SelectList(ViewBag.Tags,nameof(Tag.Id),nameof(Tag.Name))">
+                <label asp-for="productSizes" class="form-label">Size</label>
+                <select class="form-select" asp-for="productSizes" asp-items="new SelectList(ViewBag.Sizes,nameof(Size.Id),nameof(Size.Name))">
                 </select>
-                <span asp-validation-for="TagsIds" style="color:red"></span>
+                <span asp-validation-for="productSizes" style="color:red"></span>
+            </div>
+
+            <div class="mb-3 col-md-3">
+                <label asp-for="ProductColors" class="form-label">Color</label>
+                <select class="form-select" asp-for="ProductColors" asp-items="new SelectList(ViewBag.Colors,nameof(Color.Id),nameof(Color.Name))">
+                </select>
+                <span asp-validation-for="ProductColors" style="color:red"></span>
+            </div>
+
+            <div class="mb-3 col-md-3">
+                <label asp-for="productMaterials" class="form-label">Material</label>
+                <select class="form-select" asp-for="productMaterials" asp-items="new SelectList(ViewBag.Materials,nameof(Material.Id),nameof(Material.Name))">
+                </select>
+                <span asp-validation-for="productSizes" style="color:red"></span>
+            </div>
+
+        </div>
+        <div class="row align-items-center">
+            <div class="mb-3 col-md-6">
+                <label asp-for="Description" class="form-label">Description</label>
+                <textarea class="form-control" asp-for="Description" rows="4"></textarea>
+                <span asp-validation-for="Description" style="color:red"></span>
             </div>
         </div>
         <div class="row">
             <div class="mb-3 col-md-3">
-                <label asp-for="MainPhoto" class="form-label">MainPhoto</label>
-                <input asp-for="MainPhoto" class="form-control">
-                <span asp-validation-for="MainPhoto" style="color:red"></span>
-            </div>
-            <div class="mb-3 col-md-3">
-                <label asp-for="HoverPhoto" class="form-label">HoverPhoto</label>
-                <input asp-for="HoverPhoto" class="form-control">
-                <span asp-validation-for="HoverPhoto" style="color:red"></span>
-            </div>
-            <div class="mb-3 col-md-3">
-                <label asp-for="Photos" class="form-label"> additional Photos</label>
-                <input asp-for="Photos" class="form-control">
-                <span asp-validation-for="Photos" style="color:red"></span>
+                <label asp-for="ProductImages" class="form-label">ImageUrl</label>
+                <input asp-for="ProductImages" class="form-control">
+                <span asp-validation-for="ProductImages" style="color:red"></span>
             </div>
 
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-</div> *@
+</div> 

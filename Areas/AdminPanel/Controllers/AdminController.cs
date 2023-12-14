@@ -6,10 +6,10 @@ namespace Diana.Areas.AdminPanel.Controllers
     [Area("AdminPanel")]
     public class AdminController : Controller
     {
-        AppDbContext _db;
-        public AdminController(AppDbContext db)
+        AppDbContext _context;
+        public AdminController(AppDbContext context)
         {
-            _db = db;
+            _context = context;
         }
 
         public IActionResult Index()

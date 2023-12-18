@@ -1,4 +1,6 @@
 ﻿using Diana.Areas.AdminPanel.ViewModels.Product;
+using Diana.Helpers;
+using Diana.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -7,7 +9,6 @@ using NuGet.Protocol.Plugins;
 namespace Diana.Areas.AdminPanel.Controllers
 {
     [Area("AdminPanel")]
-    [Authorize]
     public class ProductController : Controller
     {
         AppDbContext _context { get; set; }
@@ -29,6 +30,11 @@ namespace Diana.Areas.AdminPanel.Controllers
                 .Include(b => b.productSizes)
                 .ThenInclude(b => b.Size)
                 .ToListAsync();
+            ViewBag.Categories = await _context.Categories.ToListAsync();
+            ViewBag.Sizes = await _context.ProductSizes.ToListAsync();
+            ViewBag.Colors = await _context.ProductColors.ToListAsync();
+            ViewBag.Materials = await _context.ProductMaterials.ToListAsync();
+
             return View(product);
         }
         public async Task<IActionResult> Create()
@@ -71,6 +77,61 @@ namespace Diana.Areas.AdminPanel.Controllers
                 productMaterials=new List<ProductMaterial>(),
                 ProductColors=new List<ProductColor>()
             };
+
+
+            foreach (var item in createProductVM.productSizes)
+            {
+                ProductSize productSize = new ProductSize()
+                {
+                    Product = product,
+                    Size = item.Size
+                };
+                _context.ProductSizes.Add(productSize);
+            }
+
+            foreach (var item in createProductVM.ProductColors)
+            {
+                ProductColor productColor = new ProductColor()
+                {
+                    Product = product,
+                    Color = item.Color
+                };
+                _context.ProductColors.Add(productColor);
+            }
+
+            foreach (var item in createProductVM.productMaterials)
+            {
+                ProductMaterial productMaterial = new ProductMaterial()
+                {
+                    Product = product,
+                    Material = item.Material
+                };
+                _context.ProductMaterials.Add(productMaterial);
+            }
+
+            foreach (var item in createProductVM.ProductImages)
+            {
+                if (!item.CheckType("image/"))
+                {
+                    ModelState.AddModelError("Photos", "Enter right format");
+                    continue;
+                }
+                if (!item.CheckLength(3000))
+                {
+                    ModelState.AddModelError("Photos", "Maxsimum 3mb photo can be added");
+                    continue;
+                }
+
+
+                ProductImages productImages = new ProductImages()
+                {
+                    ImgUrl = item.Upload(_environment.WebRootPath, @"\Upload\Product\"),
+                    Product = product,
+                };
+
+                _context.ProductImages.Add(productImages);
+            }
+
             await _context.Products.AddAsync(product);
             await _context.SaveChangesAsync();
 
